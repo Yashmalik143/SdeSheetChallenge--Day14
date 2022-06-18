@@ -1,0 +1,32 @@
+#include<bits/stdc++.h>
+
+vector<int> kthSmallLarge(vector<int> &arr, int n, int k)
+{
+	// Write your code here.
+    vector<int>res;
+    priority_queue<int> lar;
+    priority_queue<int ,vector<int>,greater<int>> smll;
+    for(int i =0;i<k;i++)
+    {
+      lar.push(arr[i]);
+      smll.push(arr[i]);  
+        
+    }
+    for(int i =k;i<n;i++)
+    {
+        if(lar.top()>arr[i])
+        {
+            lar.pop();
+            lar.push(arr[i]);
+        }
+        if(smll.top()<arr[i])
+        {
+            smll.pop();
+            smll.push(arr[i]);
+        }
+    }
+    res.push_back(lar.top());
+    res.push_back(smll.top());
+    
+    return res;
+}
